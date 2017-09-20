@@ -36,10 +36,43 @@ float golden_ration_fractional_iteration(float phi, float EPS) {
        return phi;
 };
 
+int fibonacci(int n) {
+
+    if(n < 2) return n;
+    else {
+         return fibonacci(n-1) + fibonacci(n-2);
+    }  
+};
+
+float golden_ration_fibonacci_iteration(int seed, float EPS) {
+
+       float denum = fibonacci(seed),
+             num = fibonacci(seed + 1), 
+             tmp = 0.0;
+
+       float phi = num / denum; 
+
+       while((phi > tmp)?(phi - tmp):(tmp - phi) > EPS) {
+
+             tmp = phi;
+
+             seed++;
+
+             denum = num;
+             num = fibonacci(seed);
+             phi = num / denum;
+       }
+       
+
+       return phi;
+};
+
+
 int main() {
 
     printf("%lf\n", golden_ration_root_iteration(1.0, 1E-8)); 
     printf("%lf\n", golden_ration_fractional_iteration(1.0, 1E-8)); 
+    printf("%lf\n", golden_ration_fibonacci_iteration(2, 1E-8)); 
 
  return(0);
 };
